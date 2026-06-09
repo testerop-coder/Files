@@ -1,0 +1,24 @@
+[Unit]
+Description=File Provider Telegram Bot
+After=network.target mongod.service
+Wants=mongod.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/telegram-bot
+ExecStart=/home/ubuntu/telegram-bot/telegram-bot
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=telegram-bot
+
+# Environment file
+EnvironmentFile=/home/ubuntu/telegram-bot/.env
+
+# Auto-restart every 24 hours
+RuntimeMaxSec=86400
+
+[Install]
+WantedBy=multi-user.target
